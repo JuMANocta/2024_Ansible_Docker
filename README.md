@@ -1,11 +1,10 @@
 # Ansible Docker
 
-Ceci est un simple exemple de déploiement d'une application web avec Ansible et Docker.
+## Aperçu
+Ce projet démontre le déploiement d'une application web OpenWebUI en utilisant Ansible et Docker, illustrant une architecture moderne basée sur conteneurs. L'application OpenWebUI offre une interface utilisateur ChatGPT like pour interagir avec Ollama, un modèle de langage naturel local (LLM) qui peut être utilisé pour générer du texte en fonction de l'entrée utilisateur.
 
-L'exemple sera basé sur une application WEB OpenWebUI.
-Deux containers seront créés:
-- Un container pour Ollama
-- Un container pour OpenWebUI
+## Architecture
+L'application se compose de deux conteneurs principaux : Ollama, qui agit comme LLM local, et OpenWebUI, qui fournit une interface graphique pour interagir avec Ollama like ChatGPT.
 
 ## Prérequis WSL2
 ### Installation de Ansible
@@ -20,12 +19,11 @@ Puis activer WSL2 dans les paramètres de Docker Desktop
 et ativer le partage de Docker pour la distro WSL2 souhaitée.
 
 ## Créer les images Dockers pour Ollama et OpenWebUI
-cf Ollam/Dockerfile
-
-cf Open-WebUI/Dockerfile
+- Ollam/Dockerfile
+- Open-WebUI/Dockerfile
 
 ## Créer le fichier de configuration Ansible
-cf playbook.yml
+- playbook.yml
 
 ## Exécution du Playbook
 ```bash
