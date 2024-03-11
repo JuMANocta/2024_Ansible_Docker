@@ -1,0 +1,35 @@
+- name: Déployer les containers sur le même réseau
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Créer un réseau ollama_network
+      docker_network:
+        name: ollama_network
+        state: present
+    - name: Construire les images Docker
+  docker_image:
+    name: "{{ item.name }}"
+    path: "{{ item.path }}"
+    build:
+      pull: true
+  loop:
+    - { name: "ollama-backend", path: "/Ollama/Dockerfile" }
+    - { name: "ollama-frontend", path: "/Open-WebUI/Dockerfile" }
+    - name: Lancer le container ollama-backend
+      docker_container:
+        name: ollama-backend
+        image: ollama-backend
+        state: started
+        ports:
+          - "11434:11434"
+        networks:
+          - name: ollama_network
+    - name: Lancer le container ollama-frontend
+      docker_container:
+        name: ollama-frontend
+        image: ollama-frontend
+        state: started
+        ports:
+          - "8080:8080"
+        networks:
+          - name: ollama_network
