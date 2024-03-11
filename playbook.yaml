@@ -25,7 +25,9 @@
           - "11434:11434"
         networks:
           - name: ollama_network
-        networks_cli_compatible: yes
+        container_default_behavior: no_defaults
+        network_mode: ollama_network
+        networks_cli_compatible: true
     - name: Lancer le container ollama-frontend
       docker_container:
         name: ollama-frontend
@@ -35,4 +37,6 @@
           - "8080:8080"
         networks:
           - name: ollama_network
-        networks_cli_compatible: yes
+        container_default_behavior: no_defaults
+        network_mode: ollama_network
+        networks_cli_compatible: true
