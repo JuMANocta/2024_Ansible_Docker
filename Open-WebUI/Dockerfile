@@ -1,5 +1,5 @@
 # Étape 1: Construction du Frontend
-FROM node:alpine as frontend-builder
+FROM node:latest as frontend-builder
 
 # Cloner le dépôt
 RUN git clone https://github.com/open-webui/open-webui.git /open-webui

@@ -7,14 +7,15 @@
         name: ollama_network
         state: present
     - name: Construire les images Docker
-  docker_image:
-    name: "{{ item.name }}"
-    path: "{{ item.path }}"
-    build:
-      pull: true
-  loop:
-    - { name: "ollama-backend", path: "/Ollama/Dockerfile" }
-    - { name: "ollama-frontend", path: "/Open-WebUI/Dockerfile" }
+      docker_image:
+        name: "{{ item.name }}"
+        build:
+          path: "{{ item.path }}"
+          pull: true
+        source: build
+      loop:
+        - { name: "ollama-backend", path: "Ollama/" }
+        - { name: "ollama-frontend", path: "Open-WebUI/" }
     - name: Lancer le container ollama-backend
       docker_container:
         name: ollama-backend
@@ -24,6 +25,7 @@
           - "11434:11434"
         networks:
           - name: ollama_network
+        networks_cli_compatible: yes
     - name: Lancer le container ollama-frontend
       docker_container:
         name: ollama-frontend
@@ -33,3 +35,4 @@
           - "8080:8080"
         networks:
           - name: ollama_network
+        networks_cli_compatible: yes
